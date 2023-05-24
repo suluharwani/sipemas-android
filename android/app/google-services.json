@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "201684499062",
+    "project_id": "sipemas-7ef4b",
+    "storage_bucket": "sipemas-7ef4b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:201684499062:android:c66baca564e9aa432b7d57",
+        "android_client_info": {
+          "package_name": "com.instaflutter.free_login_screen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "201684499062-e8a6r5jv9181vedu91jdk5te13d46qa6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7diYMftMgNvY-cTYuV6bflt6rjx0vTx0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "201684499062-e8a6r5jv9181vedu91jdk5te13d46qa6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:201684499062:android:e7fa527544cdb0c32b7d57",
+        "android_client_info": {
+          "package_name": "com.irene.sipemas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "201684499062-e8a6r5jv9181vedu91jdk5te13d46qa6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7diYMftMgNvY-cTYuV6bflt6rjx0vTx0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "201684499062-e8a6r5jv9181vedu91jdk5te13d46qa6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
