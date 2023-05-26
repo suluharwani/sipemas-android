@@ -211,7 +211,7 @@ class _FormLaporanState extends State<FormLaporan> {
                 return null;
               },
             ),
-            Text("Rating Pelayanan", style: TextStyle(
+            const Text("Rating Pelayanan", style: TextStyle(
               fontSize: 20,
             ),),
             RadioListRating(),
@@ -225,8 +225,8 @@ class _FormLaporanState extends State<FormLaporan> {
                     // Process data.
                   }
                 },
-                child: Center(
-                  child: const Text('Submit'),
+                child: const Center(
+                  child: Text('Submit'),
                 ),
               ),
             ),
@@ -250,63 +250,61 @@ class _RadioListRatingState extends State<RadioListRating> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: SingleChildScrollView(
-          child: Column(
+    return SingleChildScrollView(
+      child: Column(
       children: <Widget>[
-        RadioListTile<RatingLayanan>(
-          title: const Text('Sangat Tidak Berkualitas'),
-          value: RatingLayanan.R0,
-          groupValue: _character,
-          onChanged: (RatingLayanan? value) {
-            setState(() {
-              _character = value;
-            });
-          },
-        ),
-        RadioListTile<RatingLayanan>(
-          title: const Text('Tidak Berkualitas'),
-          value: RatingLayanan.R1,
-          groupValue: _character,
-          onChanged: (RatingLayanan? value) {
-            setState(() {
-              _character = value;
-            });
-          },
-        ),
-        RadioListTile<RatingLayanan>(
-          title: const Text('Cukup Berkualitas'),
-          value: RatingLayanan.R2,
-          groupValue: _character,
-          onChanged: (RatingLayanan? value) {
-            setState(() {
-              _character = value;
-            });
-          },
-        ),
-        RadioListTile<RatingLayanan>(
-          title: const Text('Berkualitas'),
-          value: RatingLayanan.R3,
-          groupValue: _character,
-          onChanged: (RatingLayanan? value) {
-            setState(() {
-              _character = value;
-            });
-          },
-        ),
-        RadioListTile<RatingLayanan>(
-          title: const Text('Sangat Berkualitas'),
-          value: RatingLayanan.R4,
-          groupValue: _character,
-          onChanged: (RatingLayanan? value) {
-            setState(() {
-              _character = value;
-            });
-          },
-        ),
+    RadioListTile<RatingLayanan>(
+      title: const Text('Sangat Tidak Berkualitas'),
+      value: RatingLayanan.R0,
+      groupValue: _character,
+      onChanged: (RatingLayanan? value) {
+        setState(() {
+          _character = value;
+        });
+      },
+    ),
+    RadioListTile<RatingLayanan>(
+      title: const Text('Tidak Berkualitas'),
+      value: RatingLayanan.R1,
+      groupValue: _character,
+      onChanged: (RatingLayanan? value) {
+        setState(() {
+          _character = value;
+        });
+      },
+    ),
+    RadioListTile<RatingLayanan>(
+      title: const Text('Cukup Berkualitas'),
+      value: RatingLayanan.R2,
+      groupValue: _character,
+      onChanged: (RatingLayanan? value) {
+        setState(() {
+          _character = value;
+        });
+      },
+    ),
+    RadioListTile<RatingLayanan>(
+      title: const Text('Berkualitas'),
+      value: RatingLayanan.R3,
+      groupValue: _character,
+      onChanged: (RatingLayanan? value) {
+        setState(() {
+          _character = value;
+        });
+      },
+    ),
+    RadioListTile<RatingLayanan>(
+      title: const Text('Sangat Berkualitas'),
+      value: RatingLayanan.R4,
+      groupValue: _character,
+      onChanged: (RatingLayanan? value) {
+        setState(() {
+          _character = value;
+        });
+      },
+    ),
       ]
     ),
-        ),
     );
   }
 }
@@ -357,10 +355,10 @@ class statusWidgetList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-          leading: CircleAvatar(child: Text('A')),
+          leading: const CircleAvatar(child: Text('A')),
           title: Text(teks),
-          subtitle: Text('Supporting text'),
-          trailing: Text('10.00 PM'),
+          subtitle: const Text('Supporting text'),
+          trailing: const Text('10.00 PM'),
         );
   }
 }

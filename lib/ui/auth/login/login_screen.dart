@@ -47,7 +47,7 @@ class _LoginScreen extends State<LoginScreen> {
                   } else {
                     if (!mounted) return;
                     showSnackBar(context,
-                        state.message ?? 'Couldn\'t login, Please try again.');
+                        state.message ?? 'Tidak dapat login, mohon ulangi');
                   }
                 },
               ),
@@ -55,7 +55,7 @@ class _LoginScreen extends State<LoginScreen> {
                 listener: (context, state) async {
                   if (state is ValidLoginFields) {
                     await context.read<LoadingCubit>().showLoading(
-                        context, 'Logging in, Please wait...', false);
+                        context, 'Proses login, mohon tunggu...', false);
                     if (!mounted) return;
                     context.read<AuthenticationBloc>().add(
                           LoginWithEmailAndPasswordEvent(
@@ -109,9 +109,9 @@ class _LoginScreen extends State<LoginScreen> {
                               keyboardType: TextInputType.emailAddress,
                               cursorColor: const Color(colorPrimary),
                               decoration: getInputDecoration(
-                                  hint: 'Email Address',
+                                  hint: 'Email',
                                   darkMode: isDarkMode(context),
-                                  errorColor: Theme.of(context).errorColor)),
+                                  errorColor: Theme.of(context).colorScheme.error)),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
@@ -132,7 +132,7 @@ class _LoginScreen extends State<LoginScreen> {
                               decoration: getInputDecoration(
                                   hint: 'Password',
                                   darkMode: isDarkMode(context),
-                                  errorColor: Theme.of(context).errorColor)),
+                                  errorColor: Theme.of(context).colorScheme.error)),
                         ),
 
                         /// forgot password text, navigates user to ResetPasswordScreen
@@ -148,7 +148,7 @@ class _LoginScreen extends State<LoginScreen> {
                                 onTap: () =>
                                     push(context, const ResetPasswordScreen()),
                                 child: const Text(
-                                  'Forgot password?',
+                                  'Lupa password?',
                                   style: TextStyle(
                                       color: Colors.lightBlue,
                                       fontWeight: FontWeight.bold,
@@ -189,58 +189,58 @@ class _LoginScreen extends State<LoginScreen> {
                                 .add(ValidateLoginFieldsEvent(_key)),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(32.0),
-                          child: Center(
-                            child: Text(
-                              'OR',
-                              style: TextStyle(
-                                  color: isDarkMode(context)
-                                      ? Colors.white
-                                      : Colors.black),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              right: 40.0, left: 40.0, bottom: 20),
-                          child: ElevatedButton.icon(
-                            label: const Text(
-                              'Facebook Login',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                            icon: Image.asset(
-                              'assets/images/facebook_logo.png',
-                              color: Colors.white,
-                              height: 24,
-                              width: 24,
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              fixedSize: Size.fromWidth(
-                                  MediaQuery.of(context).size.width / 1.5),
-                              padding: const EdgeInsets.symmetric(vertical: 16),
-                              backgroundColor: const Color(facebookButtonColor),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25.0),
-                                side: const BorderSide(
-                                  color: Color(facebookButtonColor),
-                                ),
-                              ),
-                            ),
-                            onPressed: () async {
-                              await context.read<LoadingCubit>().showLoading(
-                                  context, 'Logging in, Please wait...', false);
-                              if (!mounted) return;
-                              context
-                                  .read<AuthenticationBloc>()
-                                  .add(LoginWithFacebookEvent());
-                            },
-                          ),
-                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.all(32.0),
+                        //   child: Center(
+                        //     child: Text(
+                        //       'Atau',
+                        //       style: TextStyle(
+                        //           color: isDarkMode(context)
+                        //               ? Colors.white
+                        //               : Colors.black),
+                        //     ),
+                        //   ),
+                        // ),
+                        // Padding(
+                        //   padding: const EdgeInsets.only(
+                        //       right: 40.0, left: 40.0, bottom: 20),
+                        //   child: ElevatedButton.icon(
+                        //     label: const Text(
+                        //       'Facebook Login',
+                        //       textAlign: TextAlign.center,
+                        //       style: TextStyle(
+                        //           fontSize: 20,
+                        //           fontWeight: FontWeight.bold,
+                        //           color: Colors.white),
+                        //     ),
+                        //     icon: Image.asset(
+                        //       'assets/images/facebook_logo.png',
+                        //       color: Colors.white,
+                        //       height: 24,
+                        //       width: 24,
+                        //     ),
+                        //     style: ElevatedButton.styleFrom(
+                        //       fixedSize: Size.fromWidth(
+                        //           MediaQuery.of(context).size.width / 1.5),
+                        //       padding: const EdgeInsets.symmetric(vertical: 16),
+                        //       backgroundColor: const Color(facebookButtonColor),
+                        //       shape: RoundedRectangleBorder(
+                        //         borderRadius: BorderRadius.circular(25.0),
+                        //         side: const BorderSide(
+                        //           color: Color(facebookButtonColor),
+                        //         ),
+                        //       ),
+                        //     ),
+                        //     onPressed: () async {
+                        //       await context.read<LoadingCubit>().showLoading(
+                        //           context, 'Proses login, Mohon tunggu...', false);
+                        //       if (!mounted) return;
+                        //       context
+                        //           .read<AuthenticationBloc>()
+                        //           .add(LoginWithFacebookEvent());
+                        //     },
+                        //   ),
+                        // ),
                         FutureBuilder<bool>(
                           future: apple.TheAppleSignIn.isAvailable(),
                           builder: (context, snapshot) {
@@ -270,7 +270,7 @@ class _LoginScreen extends State<LoginScreen> {
                                             .read<LoadingCubit>()
                                             .showLoading(
                                                 context,
-                                                'Logging in, Please wait...',
+                                                'Proses login, Mohon tunggu...',
                                                 false);
                                         if (!mounted) return;
                                         context

@@ -36,12 +36,12 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 if (state is ResetPasswordDone) {
                   context.read<LoadingCubit>().hideLoading();
                   showSnackBar(context,
-                      'Reset password email has been sent, Please check your email.');
+                      'Reset password email telah dikirim, Mohon periksa email anda.');
                   Navigator.pop(context);
                 } else if (state is ValidResetPasswordField) {
                   await context
                       .read<LoadingCubit>()
-                      .showLoading(context, 'Sending Email...', false);
+                      .showLoading(context, 'Mengirim Email...', false);
                   if (!mounted) return;
                   context
                       .read<ResetPasswordCubit>()
@@ -112,7 +112,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                               ),
                             ),
                             child: const Text(
-                              'Send Email',
+                              'Kirim Email',
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
