@@ -32,24 +32,6 @@ class _HomeState extends State<HomeScreen> {
       TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
 
   static const List<Widget> _widgetOptions = <Widget>[
-
-    // Card(
-    //   child: Card(
-    //     elevation: 0,
-    //     shape: RoundedRectangleBorder(
-    //       side: BorderSide(
-    //         color: Color.fromARGB(25, 25, 25, 25),
-    //       ),
-    //       borderRadius: const BorderRadius.all(Radius.circular(12)),
-    //     ),
-    //     child: const SizedBox(
-    //       width: 300,
-    //       height: 100,
-    //       child: Center(child: Text('Outlined Card')),
-    //     ),
-    //   ),
-    // ),
-
     Column(
       children: <Widget>[
         Center(
@@ -58,18 +40,7 @@ class _HomeState extends State<HomeScreen> {
       ],
     ),
     ListTileExample(),
-    Column(
-      children: <Widget>[
-        Text('Halaman input'),
-        Text('pilihan menu input'),
-        Expanded(
-          child: FittedBox(
-            child: Text('Halaman input'),
-            // child: FlutterLogo(),
-          ),
-        ),
-      ],
-    ),
+    InputData(),
     ListTileExample(),
   ];
   void _onItemTapped(int index) {
@@ -199,6 +170,146 @@ class _HomeState extends State<HomeScreen> {
   }
 }
 
+class InputData extends StatelessWidget {
+  const InputData({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: FormLaporan(),
+      ),
+    );
+  }
+}
+class FormLaporan extends StatefulWidget {
+  const FormLaporan({super.key});
+
+  @override
+  State<FormLaporan> createState() => _FormLaporanState();
+}
+
+class _FormLaporanState extends State<FormLaporan> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) => Form(
+      key: _formKey,
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            TextFormField(
+              decoration: const InputDecoration(
+                hintText: 'Pengaduan',
+              ),
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return 'Masukkan teks';
+                }
+                return null;
+              },
+            ),
+            Text("Rating Pelayanan", style: TextStyle(
+              fontSize: 20,
+            ),),
+            RadioListRating(),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  // Validate will return true if the form is valid, or false if
+                  // the form is invalid.
+                  if (_formKey.currentState!.validate()) {
+                    // Process data.
+                  }
+                },
+                child: const Text('Submit'),
+              ),
+            ),
+          ],
+        ),
+      )
+
+    );
+}
+enum RatingLayanan { R0, R1, R2, R3 ,R4 }
+
+class RadioListRating extends StatefulWidget {
+  const RadioListRating({super.key});
+
+  @override
+  State<RadioListRating> createState() => _RadioListRatingState();
+}
+
+class _RadioListRatingState extends State<RadioListRating> {
+  RatingLayanan? _character = RatingLayanan.R0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: new SingleChildScrollView(
+          child: Column(
+      children: <Widget>[
+        RadioListTile<RatingLayanan>(
+          title: const Text('Sangat Tidak Berkualitas'),
+          value: RatingLayanan.R0,
+          groupValue: _character,
+          onChanged: (RatingLayanan? value) {
+            setState(() {
+              _character = value;
+            });
+          },
+        ),
+        RadioListTile<RatingLayanan>(
+          title: const Text('Tidak Berkualitas'),
+          value: RatingLayanan.R1,
+          groupValue: _character,
+          onChanged: (RatingLayanan? value) {
+            setState(() {
+              _character = value;
+            });
+          },
+        ),
+        RadioListTile<RatingLayanan>(
+          title: const Text('Cukup Berkualitas'),
+          value: RatingLayanan.R2,
+          groupValue: _character,
+          onChanged: (RatingLayanan? value) {
+            setState(() {
+              _character = value;
+            });
+          },
+        ),
+        RadioListTile<RatingLayanan>(
+          title: const Text('Berkualitas'),
+          value: RatingLayanan.R3,
+          groupValue: _character,
+          onChanged: (RatingLayanan? value) {
+            setState(() {
+              _character = value;
+            });
+          },
+        ),
+        RadioListTile<RatingLayanan>(
+          title: const Text('Sangat Berkualitas'),
+          value: RatingLayanan.R4,
+          groupValue: _character,
+          onChanged: (RatingLayanan? value) {
+            setState(() {
+              _character = value;
+            });
+          },
+        ),
+      ]
+    ),
+        ),
+    );
+  }
+}
+
+
 class BtnHome extends StatelessWidget {
   const BtnHome({super.key});
 
@@ -220,132 +331,34 @@ class ListTileExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Status Laporan')),
-      body: ListView(
-        children: const <Widget>[
-          ListTile(
-            leading: CircleAvatar(child: Text('A')),
-            title: Text('Headline'),
-            subtitle: Text('Supporting text'),
-            trailing: Icon(Icons.favorite_rounded),
-          ),
-          Divider(height: 0),
-          ListTile(
-            leading: CircleAvatar(child: Text('B')),
-            title: Text('Headline'),
-            subtitle: Text(
-                'Longer supporting text to demonstrate how the text wraps and how the leading and trailing widgets are centered vertically with the text.'),
-            trailing: Icon(Icons.favorite_rounded),
-          ),
-          Divider(height: 0),
-          ListTile(
-            leading: CircleAvatar(child: Text('C')),
-            title: Text('Headline'),
-            subtitle: Text(
-                "Longer supporting text to demonstrate how the text wraps and how setting 'ListTile.isThreeLine = true' aligns leading and trailing widgets to the top vertically with the text."),
-            trailing: Icon(Icons.favorite_rounded),
-            isThreeLine: true,
-          ),
-          ListTile(
-            leading: CircleAvatar(child: Text('C')),
-            title: Text('Headline'),
-            subtitle: Text(
-                "Longer supporting text to demonstrate how the text wraps and how setting 'ListTile.isThreeLine = true' aligns leading and trailing widgets to the top vertically with the text."),
-            trailing: Icon(Icons.favorite_rounded),
-            isThreeLine: true,
-          ),
-          ListTile(
-            leading: CircleAvatar(child: Text('C')),
-            title: Text('Headline'),
-            subtitle: Text(
-                "Longer supporting text to demonstrate how the text wraps and how setting 'ListTile.isThreeLine = true' aligns leading and trailing widgets to the top vertically with the text."),
-            trailing: Icon(Icons.favorite_rounded),
-            isThreeLine: true,
-          ),
-          ListTile(
-            leading: CircleAvatar(child: Text('C')),
-            title: Text('Headline'),
-            subtitle: Text(
-                "Longer supporting text to demonstrate how the text wraps and how setting 'ListTile.isThreeLine = true' aligns leading and trailing widgets to the top vertically with the text."),
-            trailing: Icon(Icons.favorite_rounded),
-            isThreeLine: true,
-          ),
-          ListTile(
-            leading: CircleAvatar(child: Text('C')),
-            title: Text('Headline'),
-            subtitle: Text(
-                "Longer supporting text to demonstrate how the text wraps and how setting 'ListTile.isThreeLine = true' aligns leading and trailing widgets to the top vertically with the text."),
-            trailing: Icon(Icons.favorite_rounded),
-            isThreeLine: true,
-          ),
-          ListTile(
-            leading: CircleAvatar(child: Text('C')),
-            title: Text('Headline'),
-            subtitle: Text(
-                "Longer supporting text to demonstrate how the text wraps and how setting 'ListTile.isThreeLine = true' aligns leading and trailing widgets to the top vertically with the text."),
-            trailing: Icon(Icons.favorite_rounded),
-            isThreeLine: true,
-          ),
-          Divider(height: 0),
-        ],
-      ),
-    );
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: ListView(
+          children:const [
+            statusWidgetList(teks: "test teks"),
+            statusWidgetList(teks: "test teks"),
+            statusWidgetList(teks: "test teks"),
+            statusWidgetList(teks: "test teks"),
+
+              ],
+            ),
+        ),
+      );
+   }
+}
+
+class statusWidgetList extends StatelessWidget {
+  final String teks;
+  const statusWidgetList({Key? key, required this.teks}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+          leading: CircleAvatar(child: Text('A')),
+          title: Text(teks),
+          subtitle: Text('Supporting text'),
+          trailing: Text('10.00 PM'),
+        );
   }
 }
-// class ProfileWidget extends State<HomeScreen> {
-//   late User user;
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     user = widget.user;
-//   }
-//
-//
-//
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: const Text('Profile')),
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           mainAxisSize: MainAxisSize.max,
-//           crossAxisAlignment: CrossAxisAlignment.center,
-//           children: [
-//             user.profilePictureURL == ''
-//                 ? CircleAvatar(
-//               radius: 35,
-//               backgroundColor: Colors.grey.shade400,
-//               child: ClipOval(
-//                 child: SizedBox(
-//                   width: 70,
-//                   height: 70,
-//                   child: Image.asset(
-//                     'assets/images/placeholder.jpg',
-//                     fit: BoxFit.cover,
-//                   ),
-//                 ),
-//               ),
-//             )
-//                 : displayCircleImage(user.profilePictureURL, 80, false),
-//             Padding(
-//               padding: const EdgeInsets.all(8.0),
-//               child: Text(user.fullName()),
-//             ),
-//             Padding(
-//               padding: const EdgeInsets.all(8.0),
-//               child: Text(user.email),
-//             ),
-//             Padding(
-//               padding: const EdgeInsets.all(8.0),
-//               child: Text(user.userID),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
