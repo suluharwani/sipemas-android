@@ -150,33 +150,35 @@ class _EditPage extends State<EditPage> {
         title: const Text('Edit Laporan'),
         backgroundColor: Theme.of(context).primaryColor,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Form(
-            key: _formKey,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  DocIDField,
-                  const SizedBox(height: 25.0),
-                  nameField,
-                  const SizedBox(height: 25.0),
-                  positionField,
-                  const SizedBox(height: 35.0),
-                  contactField,
-                  viewListbutton,
-                  const SizedBox(height: 45.0),
-                  SaveButon,
-                  const SizedBox(height: 15.0),
-                ],
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Form(
+              key: _formKey,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    DocIDField,
+                    const SizedBox(height: 25.0),
+                    nameField,
+                    const SizedBox(height: 25.0),
+                    positionField,
+                    const SizedBox(height: 35.0),
+                    contactField,
+                    viewListbutton,
+                    const SizedBox(height: 45.0),
+                    SaveButon,
+                    const SizedBox(height: 15.0),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
