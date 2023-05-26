@@ -175,7 +175,7 @@ class InputData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: FormLaporan(),
@@ -225,7 +225,9 @@ class _FormLaporanState extends State<FormLaporan> {
                     // Process data.
                   }
                 },
-                child: const Text('Submit'),
+                child: Center(
+                  child: const Text('Submit'),
+                ),
               ),
             ),
           ],
@@ -249,7 +251,7 @@ class _RadioListRatingState extends State<RadioListRating> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: new SingleChildScrollView(
+        child: SingleChildScrollView(
           child: Column(
       children: <Widget>[
         RadioListTile<RatingLayanan>(
