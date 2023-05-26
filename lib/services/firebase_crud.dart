@@ -57,7 +57,7 @@ class FirebaseCrud {
     required String kategori,
     required String pengaduan,
     required String rating,
-    required String docId
+    required String docId,
   }) async {
     Response response = Response();
     DocumentReference documentReferencer =

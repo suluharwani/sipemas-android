@@ -1,4 +1,5 @@
 class Laporan{
+
   String? uid;
   String? iduser;
   String? tanggal;

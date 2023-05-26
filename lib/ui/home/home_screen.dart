@@ -1,5 +1,5 @@
 import 'dart:math';
-
+import 'package:flutter_login_screen/ui/page/addpage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_login_screen/constants.dart';
@@ -41,7 +41,8 @@ class _HomeState extends State<HomeScreen> {
     ),
     ListTileExample(),
     InputData(),
-    ListTileExample(),
+    InputData(),
+
   ];
   void _onItemTapped(int index) {
     setState(() {
@@ -130,11 +131,10 @@ class _HomeState extends State<HomeScreen> {
               isDarkMode(context) ? Colors.grey.shade900 : Colors.grey.shade50,
           centerTitle: true,
         ),
-        body:
-          Container(
-            child:   _widgetOptions.elementAt(_selectedIndex),
-          ),
-          // child:  _widgetOptions.elementAt(_selectedIndex),
+        body: Container(
+          child: _widgetOptions.elementAt(_selectedIndex),
+        ),
+        // child:  _widgetOptions.elementAt(_selectedIndex),
 
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
@@ -183,6 +183,7 @@ class InputData extends StatelessWidget {
     );
   }
 }
+
 class FormLaporan extends StatefulWidget {
   const FormLaporan({super.key});
 
@@ -211,9 +212,12 @@ class _FormLaporanState extends State<FormLaporan> {
                 return null;
               },
             ),
-            const Text("Rating Pelayanan", style: TextStyle(
-              fontSize: 20,
-            ),),
+            const Text(
+              "Rating Pelayanan",
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ),
             RadioListRating(),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -232,11 +236,10 @@ class _FormLaporanState extends State<FormLaporan> {
             ),
           ],
         ),
-      )
-
-    );
+      ));
 }
-enum RatingLayanan { R0, R1, R2, R3 ,R4 }
+
+enum RatingLayanan { R0, R1, R2, R3, R4 }
 
 class RadioListRating extends StatefulWidget {
   const RadioListRating({super.key});
@@ -251,77 +254,72 @@ class _RadioListRatingState extends State<RadioListRating> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-      children: <Widget>[
-    RadioListTile<RatingLayanan>(
-      title: const Text('Sangat Tidak Berkualitas'),
-      value: RatingLayanan.R0,
-      groupValue: _character,
-      onChanged: (RatingLayanan? value) {
-        setState(() {
-          _character = value;
-        });
-      },
-    ),
-    RadioListTile<RatingLayanan>(
-      title: const Text('Tidak Berkualitas'),
-      value: RatingLayanan.R1,
-      groupValue: _character,
-      onChanged: (RatingLayanan? value) {
-        setState(() {
-          _character = value;
-        });
-      },
-    ),
-    RadioListTile<RatingLayanan>(
-      title: const Text('Cukup Berkualitas'),
-      value: RatingLayanan.R2,
-      groupValue: _character,
-      onChanged: (RatingLayanan? value) {
-        setState(() {
-          _character = value;
-        });
-      },
-    ),
-    RadioListTile<RatingLayanan>(
-      title: const Text('Berkualitas'),
-      value: RatingLayanan.R3,
-      groupValue: _character,
-      onChanged: (RatingLayanan? value) {
-        setState(() {
-          _character = value;
-        });
-      },
-    ),
-    RadioListTile<RatingLayanan>(
-      title: const Text('Sangat Berkualitas'),
-      value: RatingLayanan.R4,
-      groupValue: _character,
-      onChanged: (RatingLayanan? value) {
-        setState(() {
-          _character = value;
-        });
-      },
-    ),
-      ]
-    ),
+      child: Column(children: <Widget>[
+        RadioListTile<RatingLayanan>(
+          title: const Text('Sangat Tidak Berkualitas'),
+          value: RatingLayanan.R0,
+          groupValue: _character,
+          onChanged: (RatingLayanan? value) {
+            setState(() {
+              _character = value;
+            });
+          },
+        ),
+        RadioListTile<RatingLayanan>(
+          title: const Text('Tidak Berkualitas'),
+          value: RatingLayanan.R1,
+          groupValue: _character,
+          onChanged: (RatingLayanan? value) {
+            setState(() {
+              _character = value;
+            });
+          },
+        ),
+        RadioListTile<RatingLayanan>(
+          title: const Text('Cukup Berkualitas'),
+          value: RatingLayanan.R2,
+          groupValue: _character,
+          onChanged: (RatingLayanan? value) {
+            setState(() {
+              _character = value;
+            });
+          },
+        ),
+        RadioListTile<RatingLayanan>(
+          title: const Text('Berkualitas'),
+          value: RatingLayanan.R3,
+          groupValue: _character,
+          onChanged: (RatingLayanan? value) {
+            setState(() {
+              _character = value;
+            });
+          },
+        ),
+        RadioListTile<RatingLayanan>(
+          title: const Text('Sangat Berkualitas'),
+          value: RatingLayanan.R4,
+          groupValue: _character,
+          onChanged: (RatingLayanan? value) {
+            setState(() {
+              _character = value;
+            });
+          },
+        ),
+      ]),
     );
   }
 }
-
 
 class BtnHome extends StatelessWidget {
   const BtnHome({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     return OutlinedButton(
       onPressed: () {
         debugPrint('Received click');
       },
       child: const Text('Click Me'),
-
     );
   }
 }
@@ -329,23 +327,21 @@ class BtnHome extends StatelessWidget {
 class ListTileExample extends StatelessWidget {
   const ListTileExample({super.key});
 
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Laporan',
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: ListView(
-          children:const [
-            statusWidgetList(teks: "test teks"),
-            statusWidgetList(teks: "test teks"),
-            statusWidgetList(teks: "test teks"),
-            statusWidgetList(teks: "test teks"),
+      theme: ThemeData(
+        primarySwatch: Colors.indigo,
+        brightness: Brightness.light,
+      ),
+      home: AddPage(),
+    );
+  }
 
-              ],
-            ),
-        ),
-      );
-   }
 }
 
 class statusWidgetList extends StatelessWidget {
@@ -355,10 +351,10 @@ class statusWidgetList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-          leading: const CircleAvatar(child: Text('A')),
-          title: Text(teks),
-          subtitle: const Text('Supporting text'),
-          trailing: const Text('10.00 PM'),
-        );
+      leading: const CircleAvatar(child: Text('A')),
+      title: Text(teks),
+      subtitle: const Text('Supporting text'),
+      trailing: const Text('10.00 PM'),
+    );
   }
 }
