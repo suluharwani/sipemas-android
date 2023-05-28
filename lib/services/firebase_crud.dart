@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../model/response.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -44,11 +45,22 @@ class FirebaseCrud {
     return response;
   }
   static Stream<QuerySnapshot> readLaporan() {
-    CollectionReference notesItemCollection =
-        _Collection;
+     final iduser = FirebaseAuth.instance.currentUser!.uid;
+
+    Query<Object?> notesItemCollection =
+        _Collection.where("iduser", isEqualTo:  iduser);
 
     return notesItemCollection.snapshots();
   }
+
+  // Future<QuerySnapshot> readLaporan() async {
+  //   final iduser = FirebaseAuth.instance.currentUser!.uid;
+  //
+  //   FirebaseFirestore.instance
+  //       .collection("laporan")
+  //       .doc(iduser)
+  //       .get();
+  // }
   static Future<Response> updateLaporan({
     required String iduser,
     required String tanggal,

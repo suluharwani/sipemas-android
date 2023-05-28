@@ -341,7 +341,22 @@ class ListTileExample extends StatelessWidget {
       home: AddPage(),
     );
   }
-
+  // Widget build(BuildContext context) {
+  //   return MaterialApp(
+  //     debugShowCheckedModeBanner: false,
+  //     home: Scaffold(
+  //       body: ListView(
+  //         children:const [
+  //           statusWidgetList(teks: "test teks"),
+  //           statusWidgetList(teks: "test teks"),
+  //           statusWidgetList(teks: "test teks"),
+  //           statusWidgetList(teks: "test teks"),
+  //
+  //             ],
+  //           ),
+  //       ),
+  //     );
+  //  }
 }
 
 class statusWidgetList extends StatelessWidget {

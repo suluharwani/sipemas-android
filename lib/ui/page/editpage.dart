@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_login_screen/ui/page/listpage.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,8 @@ class EditPage extends StatefulWidget {
 }
 
 class _EditPage extends State<EditPage> {
+  User? user = FirebaseAuth.instance.currentUser;
+
   final _laporan_nama = TextEditingController();
   final _laporan_pengaduan = TextEditingController();
   final _laporan_rating = TextEditingController();
@@ -112,7 +115,7 @@ class _EditPage extends State<EditPage> {
                 nama: _laporan_nama.text,
                 pengaduan: _laporan_pengaduan.text,
                 rating: _laporan_rating.text,
-                iduser: 'test_id',
+                iduser: user!.uid,
                 jenis_kelamin: 'L',
                 kategori: 'das',
                 tanggal: 'das',

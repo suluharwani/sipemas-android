@@ -1,10 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/physics.dart';
 import 'package:flutter_login_screen/ui/page/listpage.dart';
 import 'package:flutter/material.dart';
-
+// import '../../model/user.dart';
 import '../../services/firebase_crud.dart';
 
-class AddPage extends StatefulWidget {
-  @override
+class AddPage extends StatefulWidget{
+
+
+@override
   State<StatefulWidget> createState() {
     // TODO: implement createState
     return _AddPage();
@@ -12,6 +16,12 @@ class AddPage extends StatefulWidget {
 }
 
 class _AddPage extends State<AddPage> {
+  // final name = user.displayName;
+  // final email = user.email;
+  // final photoUrl = user.photoURL;
+  // final emailVerified = user.emailVerified;
+  // final uid = user.uid;
+
   // String? uid;
   // String? iduser;
   // String? tanggal;
@@ -19,23 +29,32 @@ class _AddPage extends State<AddPage> {
   // String? jenis_kelamin;
   // String? kategori;
   // String? pengaduan;
-  // String? rating;
+  // String?
+  User? user = FirebaseAuth.instance.currentUser;
+  
+// // Check if the user is signed in
+//   if (user != null) {
+//   String uid = user.uid; // <-- User ID
+//   String? email = user.email; // <-- Their email
+//   }
   final _laporan_nama = TextEditingController();
   final _laporan_pengaduan = TextEditingController();
   final _laporan_rating = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
+  void initState() {
+    // TODO: implement initState
+    _laporan_nama.value =
+        TextEditingValue(text: user!.displayName.toString());
+  }
   @override
   Widget build(BuildContext context) {
+    print(user);
     final nameField = TextFormField(
         controller: _laporan_nama,
+
+        readOnly: false,
         autofocus: false,
-        validator: (value) {
-          if (value == null || value.trim().isEmpty) {
-            return 'This field is required';
-          }
-        },
         decoration: InputDecoration(
             contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
             hintText: "Nama",
@@ -50,7 +69,8 @@ class _AddPage extends State<AddPage> {
           }
         },
         decoration: InputDecoration(
-            contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+            // contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+
             hintText: "Laporan",
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))));
@@ -94,7 +114,7 @@ class _AddPage extends State<AddPage> {
                 nama: _laporan_nama.text,
                 pengaduan: _laporan_pengaduan.text,
                 rating: _laporan_rating.text,
-                iduser: 'test_id',
+                iduser: user!.uid,
                 jenis_kelamin: 'L',
                 kategori: '',
                 tanggal: '');
