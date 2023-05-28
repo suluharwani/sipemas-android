@@ -14,31 +14,15 @@ class AddPage extends StatefulWidget {
 }
 
 class _AddPage extends State<AddPage> {
-  // final name = user.displayName;
-  // final email = user.email;
-  // final photoUrl = user.photoURL;
-  // final emailVerified = user.emailVerified;
-  // final uid = user.uid;
-
-  // String? uid;
-  // String? iduser;
-  // String? tanggal;
-  // String? nama;
-  // String? jenis_kelamin;
-  // String? kategori;
-  // String? pengaduan;
-  // String?
   User? user = FirebaseAuth.instance.currentUser;
 
-// // Check if the user is signed in
-//   if (user != null) {
-//   String uid = user.uid; // <-- User ID
-//   String? email = user.email; // <-- Their email
-//   }
   final _laporan_nama = TextEditingController();
   final _laporan_pengaduan = TextEditingController();
   final _laporan_rating = TextEditingController();
-
+  final _ratingPelayanan = TextEditingController();
+  final _jenisKelamin = TextEditingController();
+  String? _selectedOptionRating;
+  String? _selectedOptionGender;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   void initState() {
     // TODO: implement initState
@@ -47,7 +31,6 @@ class _AddPage extends State<AddPage> {
 
   @override
   Widget build(BuildContext context) {
-    print(user);
     final nameField = TextFormField(
         controller: _laporan_nama,
         readOnly: false,
@@ -61,6 +44,48 @@ class _AddPage extends State<AddPage> {
             ),
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))));
+    final genderField = DropdownButtonFormField<String>(
+      value: _selectedOptionGender,
+      decoration: InputDecoration(
+        labelText: 'Jenis Kelamin',
+      ),
+      items: <String>['Laki-laki', 'Perempuan']
+          .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+      onChanged: (String? value) {
+        setState(() {
+          _selectedOptionGender = value;
+        });
+      },
+      onSaved: (String? value) {
+        _selectedOptionGender = value;
+      },
+    );
+    final RatingLayananField = DropdownButtonFormField<String>(
+      value: _selectedOptionRating,
+      decoration: InputDecoration(
+        labelText: 'Rating Pelayanan',
+      ),
+      items: <String>['Pilihan 1', 'Pilihan 2', 'Pilihan 3']
+          .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+      onChanged: (String? value) {
+        setState(() {
+          _selectedOptionRating = value;
+        });
+      },
+      onSaved: (String? value) {
+        _selectedOptionRating = value;
+      },
+    );
     final laporanField = TextFormField(
         controller: _laporan_pengaduan,
         autofocus: false,
@@ -118,9 +143,9 @@ class _AddPage extends State<AddPage> {
                 nama: _laporan_nama.text,
                 pengaduan: _laporan_pengaduan.text,
                 // rating: _laporan_rating.text,
-                rating: _laporan_rating.text,
+                rating: "$_selectedOptionRating",
                 iduser: user!.uid,
-                jenis_kelamin: 'L',
+                jenis_kelamin: "$_selectedOptionGender",
                 kategori: '',
                 tanggal: '');
             if (response.code != 200) {
@@ -174,7 +199,8 @@ class _AddPage extends State<AddPage> {
                     const SizedBox(height: 35.0),
                     contactField,
                     const SizedBox(height: 45.0),
-                    RadioListRating(),
+                    RatingLayananField,
+                    const SizedBox(height: 50.0),
                     viewListbutton,
                     const SizedBox(height: 55.0),
                     SaveButon,
@@ -186,77 +212,6 @@ class _AddPage extends State<AddPage> {
           ],
         ),
       ),
-    );
-  }
-}
-
-enum RatingLayanan { R0, R1, R2, R3, R4 }
-
-class RadioListRating extends StatefulWidget {
-  const RadioListRating({super.key});
-
-  @override
-  State<RadioListRating> createState() => _RadioListRatingState();
-}
-
-class _RadioListRatingState extends State<RadioListRating> {
-  RatingLayanan? _character = RatingLayanan.R0;
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(children: <Widget>[
-        RadioListTile<RatingLayanan>(
-          title: const Text('Sangat Tidak Berkualitas'),
-          value: RatingLayanan.R0,
-          groupValue: _character,
-          onChanged: (RatingLayanan? value) {
-            setState(() {
-              _character = value;
-            });
-          },
-        ),
-        RadioListTile<RatingLayanan>(
-          title: const Text('Tidak Berkualitas'),
-          value: RatingLayanan.R1,
-          groupValue: _character,
-          onChanged: (RatingLayanan? value) {
-            setState(() {
-              _character = value;
-            });
-          },
-        ),
-        RadioListTile<RatingLayanan>(
-          title: const Text('Cukup Berkualitas'),
-          value: RatingLayanan.R2,
-          groupValue: _character,
-          onChanged: (RatingLayanan? value) {
-            setState(() {
-              _character = value;
-            });
-          },
-        ),
-        RadioListTile<RatingLayanan>(
-          title: const Text('Berkualitas'),
-          value: RatingLayanan.R3,
-          groupValue: _character,
-          onChanged: (RatingLayanan? value) {
-            setState(() {
-              _character = value;
-            });
-          },
-        ),
-        RadioListTile<RatingLayanan>(
-          title: const Text('Sangat Berkualitas'),
-          value: RatingLayanan.R4,
-          groupValue: _character,
-          onChanged: (RatingLayanan? value) {
-            setState(() {
-              _character = value;
-            });
-          },
-        ),
-      ]),
     );
   }
 }
