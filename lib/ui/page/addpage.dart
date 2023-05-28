@@ -23,7 +23,43 @@ class _AddPage extends State<AddPage> {
   final _jenisKelamin = TextEditingController();
   String? _selectedOptionRating;
   String? _selectedOptionGender;
+
   String? _selectedOptionKategori;
+  String? _selectedOptionSubKategori;
+
+  List<String> _optionsKategori = [
+    'Pengaduan Bagian Medis',
+    'Pengaduan Non Medis',
+    'Pengaduan Bagian Sarana Prasarana'
+  ];
+  Map<String, List<String>> _optionsSubKategori = {
+    'Pengaduan Bagian Medis': [
+      'Poli Umum',
+      'Pelayanan Gigi',
+      'Pelayanan KIA/KB',
+      'Pelayanan imunisasi',
+      'Pelayanan gizi',
+      'Pelayanan p2p',
+      'Pelayanan laboratorium',
+      'Pelayanan darurat',
+      'tindakan (RDT)',
+      'Pelayanan nifas'
+    ],
+    'Pengaduan Non Medis': [
+      'Loket pendaftaran',
+      'pelayanan apotek',
+      'pelayanan promosi kesehatan',
+      'pelayanan sanitasi lingkungan'
+    ],
+    'Pengaduan Bagian Sarana Prasarana': [
+      'Ruangan pelayanan medis',
+      'kamar mandi/WC pasien',
+      'KM/WC persalinan',
+      'Parkir kendaraan',
+      'ambulance'
+    ],
+  };
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   void initState() {
     // TODO: implement initState
@@ -100,22 +136,16 @@ class _AddPage extends State<AddPage> {
         _selectedOptionRating = value;
       },
     );
-    final RatingKategoriField = DropdownButtonFormField<String>(
+    final KategoriField = DropdownButtonFormField<String>(
       value: _selectedOptionKategori,
       decoration: InputDecoration(
+        labelText: 'Kategori Layanan',
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-        labelText: 'Kategori Laporan',
         labelStyle: TextStyle(
           color: Colors.grey,
         ),
       ),
-      items: <String>[
-        'Sangat Tidak Berkualitas',
-        'Tidak Berkualitas',
-        'Cukup Berkualitas',
-        'Berkualitas',
-        'Sangat Berkualitas'
-      ].map<DropdownMenuItem<String>>((String value) {
+      items: _optionsKategori.map((String value) {
         return DropdownMenuItem<String>(
           value: value,
           child: Text(value),
@@ -124,10 +154,32 @@ class _AddPage extends State<AddPage> {
       onChanged: (String? value) {
         setState(() {
           _selectedOptionKategori = value;
+          _selectedOptionSubKategori = null;
         });
       },
-      onSaved: (String? value) {
-        _selectedOptionKategori = value;
+    );
+
+    final SubKategoriField = DropdownButtonFormField<String>(
+      value: _selectedOptionSubKategori,
+      decoration: InputDecoration(
+        labelText: 'Sub layanan',
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+        labelStyle: TextStyle(
+          color: Colors.grey,
+        ),
+      ),
+      items: _selectedOptionKategori != null
+          ? _optionsSubKategori[_selectedOptionKategori!]!.map((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList()
+          : [],
+      onChanged: (String? value) {
+        setState(() {
+          _selectedOptionSubKategori = value;
+        });
       },
     );
     final laporanField = TextFormField(
@@ -193,7 +245,8 @@ class _AddPage extends State<AddPage> {
               rating: "$_selectedOptionRating",
               iduser: user!.uid,
               jenis_kelamin: "$_selectedOptionGender",
-              kategori: '',
+              kategori: "$_selectedOptionKategori",
+              subkategori: "$_selectedOptionSubKategori",
               tanggal: "$timestamp",
             );
             if (response.code != 200) {
@@ -245,16 +298,18 @@ class _AddPage extends State<AddPage> {
                     const SizedBox(height: 20.0),
                     genderField,
                     const SizedBox(height: 25.0),
-                    laporanField,
+                    KategoriField,
+                    const SizedBox(height: 30.0),
+                    SubKategoriField,
                     const SizedBox(height: 35.0),
-                    contactField,
-                    const SizedBox(height: 45.0),
+                    laporanField,
+                    const SizedBox(height: 40.0),
                     RatingLayananField,
                     const SizedBox(height: 50.0),
                     viewListbutton,
                     const SizedBox(height: 55.0),
                     SaveButon,
-                    const SizedBox(height: 15.0),
+                    const SizedBox(height: 60.0),
                   ],
                 ),
               ),

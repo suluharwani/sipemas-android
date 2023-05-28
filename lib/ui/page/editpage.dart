@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_login_screen/ui/page/listpage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_login_screen/ui/page/listpage.dart';
 
 import '../../model/laporan.dart';
 import '../../services/firebase_crud.dart';
@@ -116,8 +116,9 @@ class _EditPage extends State<EditPage> {
                 pengaduan: _laporan_pengaduan.text,
                 rating: _laporan_rating.text,
                 iduser: user!.uid,
-                jenis_kelamin: 'L',
+                jenis_kelamin: "coba",
                 kategori: 'das',
+                subkategori: 'das',
                 tanggal: 'das',
                 docId: _docid.text);
             if (response.code != 200) {
