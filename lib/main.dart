@@ -78,7 +78,7 @@ class MyAppState extends State<MyApp> with WidgetsBindingObserver {
               ),
               SizedBox(height: 16),
               Text(
-                'Failed to initialise firebase!',
+                'Tidak terhubung ke database!',
                 style: TextStyle(color: Colors.red, fontSize: 25),
               ),
             ],

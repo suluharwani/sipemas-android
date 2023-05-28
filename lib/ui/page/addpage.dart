@@ -23,6 +23,7 @@ class _AddPage extends State<AddPage> {
   final _jenisKelamin = TextEditingController();
   String? _selectedOptionRating;
   String? _selectedOptionGender;
+  String? _selectedOptionKategori;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   void initState() {
     // TODO: implement initState
@@ -47,7 +48,11 @@ class _AddPage extends State<AddPage> {
     final genderField = DropdownButtonFormField<String>(
       value: _selectedOptionGender,
       decoration: InputDecoration(
-        labelText: 'Jenis Kelamin',
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+        labelText: "Jenis Kelamin",
+        labelStyle: TextStyle(
+          color: Colors.grey,
+        ),
       ),
       items: <String>['Laki-laki', 'Perempuan']
           .map<DropdownMenuItem<String>>((String value) {
@@ -68,10 +73,19 @@ class _AddPage extends State<AddPage> {
     final RatingLayananField = DropdownButtonFormField<String>(
       value: _selectedOptionRating,
       decoration: InputDecoration(
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
         labelText: 'Rating Pelayanan',
+        labelStyle: TextStyle(
+          color: Colors.grey,
+        ),
       ),
-      items: <String>['Pilihan 1', 'Pilihan 2', 'Pilihan 3']
-          .map<DropdownMenuItem<String>>((String value) {
+      items: <String>[
+        'Sangat Tidak Berkualitas',
+        'Tidak Berkualitas',
+        'Cukup Berkualitas',
+        'Berkualitas',
+        'Sangat Berkualitas'
+      ].map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
           child: Text(value),
@@ -86,8 +100,39 @@ class _AddPage extends State<AddPage> {
         _selectedOptionRating = value;
       },
     );
+    final RatingKategoriField = DropdownButtonFormField<String>(
+      value: _selectedOptionKategori,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+        labelText: 'Kategori Laporan',
+        labelStyle: TextStyle(
+          color: Colors.grey,
+        ),
+      ),
+      items: <String>[
+        'Sangat Tidak Berkualitas',
+        'Tidak Berkualitas',
+        'Cukup Berkualitas',
+        'Berkualitas',
+        'Sangat Berkualitas'
+      ].map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+      onChanged: (String? value) {
+        setState(() {
+          _selectedOptionKategori = value;
+        });
+      },
+      onSaved: (String? value) {
+        _selectedOptionKategori = value;
+      },
+    );
     final laporanField = TextFormField(
         controller: _laporan_pengaduan,
+        maxLines: null,
         autofocus: false,
         validator: (value) {
           if (value == null || value.trim().isEmpty) {
@@ -103,7 +148,7 @@ class _AddPage extends State<AddPage> {
               color: Colors.grey,
             ),
             border:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(0.0))));
+                OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))));
     final contactField = TextFormField(
         controller: _laporan_rating,
         autofocus: false,
@@ -139,15 +184,18 @@ class _AddPage extends State<AddPage> {
         padding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () async {
           if (_formKey.currentState!.validate()) {
+            DateTime currentTime = DateTime.now();
+            int timestamp = currentTime.millisecondsSinceEpoch;
             var response = await FirebaseCrud.addLaporan(
-                nama: _laporan_nama.text,
-                pengaduan: _laporan_pengaduan.text,
-                // rating: _laporan_rating.text,
-                rating: "$_selectedOptionRating",
-                iduser: user!.uid,
-                jenis_kelamin: "$_selectedOptionGender",
-                kategori: '',
-                tanggal: '');
+              nama: _laporan_nama.text,
+              pengaduan: _laporan_pengaduan.text,
+              // rating: _laporan_rating.text,
+              rating: "$_selectedOptionRating",
+              iduser: user!.uid,
+              jenis_kelamin: "$_selectedOptionGender",
+              kategori: '',
+              tanggal: "$timestamp",
+            );
             if (response.code != 200) {
               showDialog(
                   context: context,
@@ -194,6 +242,8 @@ class _AddPage extends State<AddPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     nameField,
+                    const SizedBox(height: 20.0),
+                    genderField,
                     const SizedBox(height: 25.0),
                     laporanField,
                     const SizedBox(height: 35.0),
