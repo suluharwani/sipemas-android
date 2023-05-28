@@ -1,14 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/physics.dart';
-import 'package:flutter_login_screen/ui/page/listpage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_login_screen/ui/page/listpage.dart';
+
 // import '../../model/user.dart';
 import '../../services/firebase_crud.dart';
 
-class AddPage extends StatefulWidget{
-
-
-@override
+class AddPage extends StatefulWidget {
+  @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
     return _AddPage();
@@ -31,7 +29,7 @@ class _AddPage extends State<AddPage> {
   // String? pengaduan;
   // String?
   User? user = FirebaseAuth.instance.currentUser;
-  
+
 // // Check if the user is signed in
 //   if (user != null) {
 //   String uid = user.uid; // <-- User ID
@@ -44,23 +42,26 @@ class _AddPage extends State<AddPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   void initState() {
     // TODO: implement initState
-    _laporan_nama.value =
-        TextEditingValue(text: user!.displayName.toString());
+    _laporan_nama.value = TextEditingValue(text: user!.displayName.toString());
   }
+
   @override
   Widget build(BuildContext context) {
     print(user);
     final nameField = TextFormField(
         controller: _laporan_nama,
-
         readOnly: false,
         autofocus: false,
         decoration: InputDecoration(
             contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-            hintText: "Nama",
+            hintText: "Nama Pelapor/Pasien",
+            labelText: "Nama Pelapor/Pasien",
+            labelStyle: TextStyle(
+              color: Colors.grey,
+            ),
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))));
-    final positionField = TextFormField(
+    final laporanField = TextFormField(
         controller: _laporan_pengaduan,
         autofocus: false,
         validator: (value) {
@@ -72,8 +73,12 @@ class _AddPage extends State<AddPage> {
             // contentPadding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
 
             hintText: "Laporan",
+            labelText: "Laporan",
+            labelStyle: TextStyle(
+              color: Colors.grey,
+            ),
             border:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))));
+                OutlineInputBorder(borderRadius: BorderRadius.circular(0.0))));
     final contactField = TextFormField(
         controller: _laporan_rating,
         autofocus: false,
@@ -110,9 +115,9 @@ class _AddPage extends State<AddPage> {
         onPressed: () async {
           if (_formKey.currentState!.validate()) {
             var response = await FirebaseCrud.addLaporan(
-
                 nama: _laporan_nama.text,
                 pengaduan: _laporan_pengaduan.text,
+                // rating: _laporan_rating.text,
                 rating: _laporan_rating.text,
                 iduser: user!.uid,
                 jenis_kelamin: 'L',
@@ -159,18 +164,19 @@ class _AddPage extends State<AddPage> {
               key: _formKey,
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
-                
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     nameField,
                     const SizedBox(height: 25.0),
-                    positionField,
+                    laporanField,
                     const SizedBox(height: 35.0),
                     contactField,
-                    viewListbutton,
                     const SizedBox(height: 45.0),
+                    RadioListRating(),
+                    viewListbutton,
+                    const SizedBox(height: 55.0),
                     SaveButon,
                     const SizedBox(height: 15.0),
                   ],
@@ -180,6 +186,77 @@ class _AddPage extends State<AddPage> {
           ],
         ),
       ),
+    );
+  }
+}
+
+enum RatingLayanan { R0, R1, R2, R3, R4 }
+
+class RadioListRating extends StatefulWidget {
+  const RadioListRating({super.key});
+
+  @override
+  State<RadioListRating> createState() => _RadioListRatingState();
+}
+
+class _RadioListRatingState extends State<RadioListRating> {
+  RatingLayanan? _character = RatingLayanan.R0;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(children: <Widget>[
+        RadioListTile<RatingLayanan>(
+          title: const Text('Sangat Tidak Berkualitas'),
+          value: RatingLayanan.R0,
+          groupValue: _character,
+          onChanged: (RatingLayanan? value) {
+            setState(() {
+              _character = value;
+            });
+          },
+        ),
+        RadioListTile<RatingLayanan>(
+          title: const Text('Tidak Berkualitas'),
+          value: RatingLayanan.R1,
+          groupValue: _character,
+          onChanged: (RatingLayanan? value) {
+            setState(() {
+              _character = value;
+            });
+          },
+        ),
+        RadioListTile<RatingLayanan>(
+          title: const Text('Cukup Berkualitas'),
+          value: RatingLayanan.R2,
+          groupValue: _character,
+          onChanged: (RatingLayanan? value) {
+            setState(() {
+              _character = value;
+            });
+          },
+        ),
+        RadioListTile<RatingLayanan>(
+          title: const Text('Berkualitas'),
+          value: RatingLayanan.R3,
+          groupValue: _character,
+          onChanged: (RatingLayanan? value) {
+            setState(() {
+              _character = value;
+            });
+          },
+        ),
+        RadioListTile<RatingLayanan>(
+          title: const Text('Sangat Berkualitas'),
+          value: RatingLayanan.R4,
+          groupValue: _character,
+          onChanged: (RatingLayanan? value) {
+            setState(() {
+              _character = value;
+            });
+          },
+        ),
+      ]),
     );
   }
 }

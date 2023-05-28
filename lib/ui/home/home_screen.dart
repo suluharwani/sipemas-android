@@ -1,12 +1,12 @@
 import 'dart:math';
-import 'package:flutter_login_screen/ui/page/addpage.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_login_screen/constants.dart';
 import 'package:flutter_login_screen/model/user.dart';
 import 'package:flutter_login_screen/services/helper.dart';
 import 'package:flutter_login_screen/ui/auth/authentication_bloc.dart';
 import 'package:flutter_login_screen/ui/auth/welcome/welcome_screen.dart';
+import 'package:flutter_login_screen/ui/page/addpage.dart';
 
 class HomeScreen extends StatefulWidget {
   final User user;
@@ -39,10 +39,9 @@ class _HomeState extends State<HomeScreen> {
         ),
       ],
     ),
+    InputData(),
     ListTileExample(),
     InputData(),
-    InputData(),
-
   ];
   void _onItemTapped(int index) {
     setState(() {
@@ -326,8 +325,6 @@ class BtnHome extends StatelessWidget {
 
 class ListTileExample extends StatelessWidget {
   const ListTileExample({super.key});
-
-
 
   @override
   Widget build(BuildContext context) {
