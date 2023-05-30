@@ -7,6 +7,7 @@ import 'package:flutter_login_screen/services/helper.dart';
 import 'package:flutter_login_screen/ui/auth/authentication_bloc.dart';
 import 'package:flutter_login_screen/ui/auth/welcome/welcome_screen.dart';
 import 'package:flutter_login_screen/ui/page/addpage.dart';
+import 'package:flutter_login_screen/ui/page/laporan/statistik.dart';
 import 'package:flutter_login_screen/ui/page/profile/viewprofile.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -33,14 +34,16 @@ class _HomeState extends State<HomeScreen> {
       TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
 
   static const List<Widget> _widgetOptions = <Widget>[
-    Column(
-      children: <Widget>[
-        Center(
-          child: BtnHome(),
-        ),
-      ],
-    ),
+    // Column(
+    //   children: <Widget>[
+    //     Center(
+    //       child: BtnHome(),
+    //     ),
+    //   ],
+    // ),
+
     InputData(),
+    BtnHome(),
     ListTileExample(),
     InputData(),
   ];
@@ -326,14 +329,36 @@ class BtnHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
-      onPressed: () {
-        debugPrint('Received click');
-      },
-      child: const Text('Click Me'),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Status'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            // Memanggil halaman StatisticPage
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => StatisticPage()),
+            );
+          },
+          child: Text('Status'),
+        ),
+      ),
     );
   }
 }
+// class BtnHome extends StatelessWidget {
+//   const BtnHome({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       // appBar: AppBar(title: const Text('Empty List Test')),
+//       body: StatisticPage(),
+//     );
+//   }
+// }
 
 class ListTileExample extends StatelessWidget {
   const ListTileExample({super.key});

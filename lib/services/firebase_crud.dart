@@ -17,6 +17,7 @@ class FirebaseCrud {
     required String subkategori,
     required String pengaduan,
     required String rating,
+    required String status,
   }) async {
     Response response = Response();
     DocumentReference documentReferencer = _Collection.doc();
@@ -29,7 +30,8 @@ class FirebaseCrud {
       "kategori": kategori,
       "subkategori": subkategori,
       "pengaduan": pengaduan,
-      "rating": rating
+      "rating": rating,
+      "status": status,
     };
 
     var result = await documentReferencer.set(data).whenComplete(() {

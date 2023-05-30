@@ -249,6 +249,7 @@ class _AddPage extends State<AddPage> {
               kategori: "$_selectedOptionKategori",
               subkategori: "$_selectedOptionSubKategori",
               tanggal: "$timestamp",
+              status: '0',
             );
             if (response.code != 200) {
               showDialog(
