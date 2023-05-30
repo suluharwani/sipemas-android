@@ -7,6 +7,7 @@ import 'package:flutter_login_screen/services/helper.dart';
 import 'package:flutter_login_screen/ui/auth/authentication_bloc.dart';
 import 'package:flutter_login_screen/ui/auth/welcome/welcome_screen.dart';
 import 'package:flutter_login_screen/ui/page/addpage.dart';
+import 'package:flutter_login_screen/ui/page/profile/viewprofile.dart';
 
 class HomeScreen extends StatefulWidget {
   final User user;
@@ -174,10 +175,21 @@ class InputData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
+      title: 'Profile',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
       home: Scaffold(
-        body: FormLaporan(),
+        appBar: AppBar(
+          title: Text('Profile'),
+        ),
+        body: SingleChildScrollView(
+          child: Center(
+            child: ProfileWidget(),
+          ),
+        ),
       ),
     );
   }

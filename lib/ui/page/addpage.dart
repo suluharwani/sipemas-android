@@ -62,8 +62,9 @@ class _AddPage extends State<AddPage> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   void initState() {
+    // print(user);
     // TODO: implement initState
-    _laporan_nama.value = TextEditingValue(text: user!.displayName.toString());
+    // _laporan_nama.value = TextEditingValue(text: user!.displayName.toString());
   }
 
   @override
