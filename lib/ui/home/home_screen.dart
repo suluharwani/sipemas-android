@@ -7,6 +7,7 @@ import 'package:flutter_login_screen/services/helper.dart';
 import 'package:flutter_login_screen/ui/auth/authentication_bloc.dart';
 import 'package:flutter_login_screen/ui/auth/welcome/welcome_screen.dart';
 import 'package:flutter_login_screen/ui/page/addpage.dart';
+import 'package:flutter_login_screen/ui/page/laporan/stat.dart';
 import 'package:flutter_login_screen/ui/page/laporan/statistik.dart';
 import 'package:flutter_login_screen/ui/page/profile/viewprofile.dart';
 
@@ -329,12 +330,15 @@ class BtnHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ButtonStyle style =
+        ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
     return Scaffold(
       appBar: AppBar(
-        title: Text('Status'),
+        title: Text('Status Laporan'),
       ),
-      body: Center(
-        child: ElevatedButton(
+      body: Column(mainAxisSize: MainAxisSize.min, children: [
+        ElevatedButton(
+          style: style,
           onPressed: () {
             // Memanggil halaman StatisticPage
             Navigator.push(
@@ -344,7 +348,18 @@ class BtnHome extends StatelessWidget {
           },
           child: Text('Status'),
         ),
-      ),
+        ElevatedButton(
+          style: style,
+          onPressed: () {
+            // Memanggil halaman StatisticPage
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ReviewStatisticPage()),
+            );
+          },
+          child: Text('Statistik'),
+        ),
+      ]),
     );
   }
 }

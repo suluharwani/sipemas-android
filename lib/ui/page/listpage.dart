@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_login_screen/model/laporan.dart';
-import 'package:flutter_login_screen/ui/page/addpage.dart';
-import 'package:flutter_login_screen/ui/page/editpage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_login_screen/ui/page/addpage.dart';
 
 import '../../services/firebase_crud.dart';
 
@@ -69,32 +67,34 @@ class _ListPage extends State<ListPage> {
                     ButtonBar(
                       alignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
+                        // TextButton(
+                        //   style: TextButton.styleFrom(
+                        //     foregroundColor: const Color.fromARGB(255, 143, 133, 226), padding: const EdgeInsets.all(5.0),
+                        //     textStyle: const TextStyle(fontSize: 20),
+                        //   ),
+                        //   child: const Text('Edit'),
+                        //   onPressed: () {
+                        //     Navigator.pushAndRemoveUntil<dynamic>(
+                        //       context,
+                        //       MaterialPageRoute<dynamic>(
+                        //         builder: (BuildContext context) => EditPage(
+                        //           laporan: Laporan(
+                        //               uid: e.id,
+                        //               nama: e["nama"],
+                        //               pengaduan: e["pengaduan"],
+                        //               rating: e["rating"]),
+                        //         ),
+                        //       ),
+                        //       (route) =>
+                        //           false, //if you want to disable back feature set to false
+                        //     );
+                        //   },
+                        // ),
                         TextButton(
                           style: TextButton.styleFrom(
-                            foregroundColor: const Color.fromARGB(255, 143, 133, 226), padding: const EdgeInsets.all(5.0),
-                            textStyle: const TextStyle(fontSize: 20),
-                          ),
-                          child: const Text('Edit'),
-                          onPressed: () {
-                            Navigator.pushAndRemoveUntil<dynamic>(
-                              context,
-                              MaterialPageRoute<dynamic>(
-                                builder: (BuildContext context) => EditPage(
-                                  laporan: Laporan(
-                                      uid: e.id,
-                                      nama: e["nama"],
-                                      pengaduan: e["pengaduan"],
-                                      rating: e["rating"]),
-                                ),
-                              ),
-                              (route) =>
-                                  false, //if you want to disable back feature set to false
-                            );
-                          },
-                        ),
-                        TextButton(
-                          style: TextButton.styleFrom(
-                            foregroundColor: const Color.fromARGB(255, 143, 133, 226), padding: const EdgeInsets.all(5.0),
+                            foregroundColor:
+                                const Color.fromARGB(255, 143, 133, 226),
+                            padding: const EdgeInsets.all(5.0),
                             textStyle: const TextStyle(fontSize: 20),
                           ),
                           child: const Text('Delete'),
