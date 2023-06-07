@@ -63,7 +63,7 @@ class _StatisticPageState extends State<StatisticPage> {
                 for (var report in reports)
                   ListTile(
                     title: Text(report['nama']),
-                    subtitle: Text(formatDate(report['tanggal'])),
+                    subtitle: Text(formatDate(report['tanggal'].toString())),
                     trailing: Text(getStatusText(int.parse(report['status']))),
                   ),
               ],

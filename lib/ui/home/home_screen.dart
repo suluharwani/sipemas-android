@@ -7,6 +7,7 @@ import 'package:flutter_login_screen/services/helper.dart';
 import 'package:flutter_login_screen/ui/auth/authentication_bloc.dart';
 import 'package:flutter_login_screen/ui/auth/welcome/welcome_screen.dart';
 import 'package:flutter_login_screen/ui/page/addpage.dart';
+import 'package:flutter_login_screen/ui/page/laporan/balasan.dart';
 import 'package:flutter_login_screen/ui/page/laporan/stat.dart';
 import 'package:flutter_login_screen/ui/page/laporan/statistik.dart';
 import 'package:flutter_login_screen/ui/page/profile/viewprofile.dart';
@@ -23,31 +24,27 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeState extends State<HomeScreen> {
   late User user;
-
+  late final BalasanList balasanList;
   @override
   void initState() {
     super.initState();
     user = widget.user;
+    balasanList = BalasanList();
   }
 
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
 
-  static const List<Widget> _widgetOptions = <Widget>[
-    // Column(
-    //   children: <Widget>[
-    //     Center(
-    //       child: BtnHome(),
-    //     ),
-    //   ],
-    // ),
+  List<Widget> get _widgetOptions {
+    return <Widget>[
+      balasanList,
+      BtnHome(),
+      ListTileExample(),
+      InputData(),
+    ];
+  }
 
-    InputData(),
-    BtnHome(),
-    ListTileExample(),
-    InputData(),
-  ];
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -80,18 +77,21 @@ class _HomeState extends State<HomeScreen> {
                 leading: user.profilePictureURL == ''
                     ? CircleAvatar(
                         backgroundColor: Colors.grey.shade400,
-                        child: ClipOval(
-                          child: SizedBox(
-                            width: 70,
-                            height: 70,
-                            child: Image.asset(
-                              'assets/images/placeholder.jpg',
-                              fit: BoxFit.cover,
-                            ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(50),
+                          child: Image.asset(
+                            'assets/images/placeholder.jpg',
+                            width: 50,
+                            height: 50,
+                            fit: BoxFit.cover,
                           ),
                         ),
                       )
-                    : displayCircleImage(user.profilePictureURL, 80, false),
+                    : ClipRRect(
+                        borderRadius: BorderRadius.circular(50),
+                        child: displayCircleImage(
+                            user.profilePictureURL, 50, false),
+                      ),
                 title: Text(user.fullName()),
                 subtitle: Text(user.email),
               ),
@@ -326,7 +326,7 @@ class _RadioListRatingState extends State<RadioListRating> {
 }
 
 class BtnHome extends StatelessWidget {
-  const BtnHome({super.key});
+  const BtnHome({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -336,33 +336,61 @@ class BtnHome extends StatelessWidget {
       appBar: AppBar(
         title: Text('Status Laporan'),
       ),
-      body: Column(mainAxisSize: MainAxisSize.min, children: [
-        ElevatedButton(
-          style: style,
-          onPressed: () {
-            // Memanggil halaman StatisticPage
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => StatisticPage()),
-            );
-          },
-          child: Text('Status'),
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            InkWell(
+              onTap: () {
+                // Memanggil halaman StatisticPage
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => StatisticPage()),
+                );
+              },
+              child: Container(
+                color: Colors.blue,
+                padding: EdgeInsets.symmetric(vertical: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.check, color: Colors.white),
+                    SizedBox(width: 8),
+                    Text('Status', style: TextStyle(color: Colors.white)),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 16),
+            InkWell(
+              onTap: () {
+                // Memanggil halaman ReviewStatisticPage
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ReviewStatisticPage()),
+                );
+              },
+              child: Container(
+                color: Colors.green,
+                padding: EdgeInsets.symmetric(vertical: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.bar_chart, color: Colors.white),
+                    SizedBox(width: 8),
+                    Text('Statistik', style: TextStyle(color: Colors.white)),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
-        ElevatedButton(
-          style: style,
-          onPressed: () {
-            // Memanggil halaman StatisticPage
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ReviewStatisticPage()),
-            );
-          },
-          child: Text('Statistik'),
-        ),
-      ]),
+      ),
     );
   }
 }
+
 // class BtnHome extends StatelessWidget {
 //   const BtnHome({super.key});
 

@@ -119,7 +119,7 @@ class _EditPage extends State<EditPage> {
                 jenis_kelamin: "coba",
                 kategori: 'das',
                 subkategori: 'das',
-                tanggal: 'das',
+                tanggal: 123,
                 docId: _docid.text);
             if (response.code != 200) {
               showDialog(

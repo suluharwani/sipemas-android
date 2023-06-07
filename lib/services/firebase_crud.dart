@@ -10,7 +10,7 @@ class FirebaseCrud {
 //CRUD method here
   static Future<Response> addLaporan({
     required String iduser,
-    required String tanggal,
+    required int tanggal,
     required String nama,
     required String jenis_kelamin,
     required String kategori,
@@ -64,7 +64,7 @@ class FirebaseCrud {
   // }
   static Future<Response> updateLaporan({
     required String iduser,
-    required String tanggal,
+    required int tanggal,
     required String nama,
     required String jenis_kelamin,
     required String kategori,

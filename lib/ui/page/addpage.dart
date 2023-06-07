@@ -248,7 +248,7 @@ class _AddPage extends State<AddPage> {
               jenis_kelamin: "$_selectedOptionGender",
               kategori: "$_selectedOptionKategori",
               subkategori: "$_selectedOptionSubKategori",
-              tanggal: "$timestamp",
+              tanggal: timestamp,
               status: '0',
             );
             if (response.code != 200) {
@@ -282,7 +282,7 @@ class _AddPage extends State<AddPage> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Input Laporan'),
-        backgroundColor: Colors.cyan,
+        backgroundColor: Colors.blue,
       ),
       body: SingleChildScrollView(
         child: Column(
